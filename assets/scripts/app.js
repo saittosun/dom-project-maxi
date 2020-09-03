@@ -14,6 +14,8 @@ const confirmAddMovieButton = cancelMovieButton.nextElementSibling;
 const userInputs = addMovieModal.querySelectorAll("input");
 // const userInputs = addMovieModal.getElementsByTagName("input");
 
+const movies = [];
+
 const toggleBackdrop = () => {
   backdrop.classList.toggle("visible");
 };
@@ -32,6 +34,12 @@ const backdropClickHandler = () => {
   toggleMovieModal();
 };
 
+const clearMovieInput = () => {
+  for (const userInput of userInputs) {
+    userInput.value = "";
+  }
+};
+
 const addMovieHandler = () => {
   const titleValue = userInputs[0].value;
   const imageUrlValue = userInputs[1].value;
@@ -48,11 +56,21 @@ const addMovieHandler = () => {
   }
 
   // bu refactor edilmis hali
-  // for (const el of userInputs) {
+  // for (const userInput of userInputs) {
   //     if (el.value.trim() === "" || +el.value > 5 || +el.value < 1) {
   //       alert("warn");
   //     }
   // }
+
+  const newMovie = {
+    title: titleValue,
+    image: imageUrlValue,
+    rating: ratingValue,
+  };
+  movies.push(newMovie);
+  console.log(movies);
+  toggleMovieModal();
+  clearMovieInput();
 };
 
 startAddMovieButton.addEventListener("click", toggleMovieModal);
